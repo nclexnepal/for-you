@@ -33,11 +33,21 @@
             font-size: 16px;
         }
 
+        #modalContent button {
+            cursor: pointer;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             height: 100vh;
             background-color: #f0f0f0;
+        }
+        #resetName{
+            height: 2px;
+            font-size: xx-small;
+            background-color: #ffffff;
+
         }
     </style>
 </head>
@@ -55,6 +65,7 @@
     <div id="messageModal" style="display: none;">
         <div id="modalContent">
             <h1 id="personalizedMessage"></h1>
+            <a id="resetName">Reset Name</a>
         </div>
     </div>
 
@@ -78,8 +89,17 @@
                 // Redirect after 5 seconds
                 setTimeout(() => {
                     window.location.href = 'flower.html';
-                }, 5000);
+                }, 4000);
             }
+        });
+
+        // Function to reset the name
+        document.getElementById('resetName').addEventListener('click', () => {
+            // Clear the name from localStorage
+            localStorage.removeItem('userName');
+
+            // Reload the page to show the name input modal
+            location.reload();
         });
 
         // Show the modal if no name is stored
@@ -96,7 +116,7 @@
                 // Redirect after 5 seconds
                 setTimeout(() => {
                     window.location.href = 'flower.html';
-                }, 5000);
+                }, 4000);
             }
         });
     </script>
