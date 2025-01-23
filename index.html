@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ask Name</title>
+    <title>Personalized Modal</title>
     <style>
         /* Style for the modal */
-        #nameModal {
+        #nameModal, #messageModal {
             position: fixed;
             top: 0;
             left: 0;
@@ -27,37 +27,22 @@
             text-align: center;
         }
 
-        #modalContent input {
+        #modalContent input, #modalContent button {
             margin-top: 10px;
             padding: 10px;
-            width: 80%;
             font-size: 16px;
-        }
-
-        #modalContent button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
         }
 
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
-        }
-
-        #nameDisplay {
-            font-size: 24px;
-            font-weight: bold;
         }
     </style>
 </head>
 <body>
+    <!-- Initial Modal for Name Input -->
     <div id="nameModal">
         <div id="modalContent">
             <p>What's your name?</p>
@@ -66,7 +51,12 @@
         </div>
     </div>
 
-    <h1 id="nameDisplay" style="display: none;">Loading...</h1>
+    <!-- Message Modal -->
+    <div id="messageModal" style="display: none;">
+        <div id="modalContent">
+            <h1 id="personalizedMessage"></h1>
+        </div>
+    </div>
 
     <script>
         // Function to handle the modal input
@@ -77,15 +67,18 @@
                 // Save the name in localStorage
                 localStorage.setItem('userName', userName);
 
-                // Hide the modal
+                // Hide the name input modal
                 document.getElementById('nameModal').style.display = 'none';
 
-                // Display the name on the page
-                const nameDisplay = document.getElementById('nameDisplay');
-                nameDisplay.textContent = `Hello, ${userName}! Welcome to the page.`;
-                nameDisplay.style.display = 'block';
+                // Display the personalized message modal
+                const personalizedMessage = document.getElementById('personalizedMessage');
+                personalizedMessage.textContent = `This is for you, ${userName}!`;
+                document.getElementById('messageModal').style.display = 'flex';
 
-                window.location.href = 'flower.html';
+                // Redirect after 5 seconds
+                setTimeout(() => {
+                    window.location.href = 'flower.html';
+                }, 5000);
             }
         });
 
@@ -94,7 +87,16 @@
             const storedName = localStorage.getItem('userName');
 
             if (storedName) {
-                window.location.href = 'flower.html';
+                // Display the personalized message modal
+                document.getElementById('nameModal').style.display = 'none';
+                const personalizedMessage = document.getElementById('personalizedMessage');
+                personalizedMessage.textContent = `This is for you, ${storedName}!`;
+                document.getElementById('messageModal').style.display = 'flex';
+
+                // Redirect after 5 seconds
+                setTimeout(() => {
+                    window.location.href = 'flower.html';
+                }, 5000);
             }
         });
     </script>
