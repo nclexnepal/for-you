@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Name</title>
+    <style>
+        /* Style for the modal */
+        #nameModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #modalContent {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        #modalContent input {
+            margin-top: 10px;
+            padding: 10px;
+            width: 80%;
+            font-size: 16px;
+        }
+
+        #modalContent button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        #nameDisplay {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="nameModal">
+        <div id="modalContent">
+            <p>What's your name?</p>
+            <input type="text" id="nameInput" placeholder="Enter your name">
+            <button id="submitName">Submit</button>
+        </div>
+    </div>
+
+    <h1 id="nameDisplay" style="display: none;">Loading...</h1>
+
+    <script>
+        // Function to handle the modal input
+        document.getElementById('submitName').addEventListener('click', () => {
+            const userName = document.getElementById('nameInput').value.trim();
+
+            if (userName) {
+                // Save the name in localStorage
+                localStorage.setItem('userName', userName);
+
+                // Hide the modal
+                document.getElementById('nameModal').style.display = 'none';
+
+                // Display the name on the page
+                const nameDisplay = document.getElementById('nameDisplay');
+                nameDisplay.textContent = `Hello, ${userName}! Welcome to the page.`;
+                nameDisplay.style.display = 'block';
+
+                window.location.href = 'flower.html';
+            }
+        });
+
+        // Show the modal if no name is stored
+        window.addEventListener('DOMContentLoaded', () => {
+            const storedName = localStorage.getItem('userName');
+
+            if (storedName) {
+                window.location.href = 'flower.html';
+            }
+        });
+    </script>
+</body>
+</html>
